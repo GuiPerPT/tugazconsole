@@ -1,6 +1,7 @@
 const ZwiftPacketMonitor = require('./ZwiftPacketMonitor_tugaz')
 const ZwiftLineMonitor = require('zwift-line-monitor');
 var ZwiftAccount = require("zwift-mobile-api");
+var moment = require('moment'); // require
 const Rider = require('./rider');
 const Team = require('./team');
 const fs = require('fs');
@@ -888,16 +889,8 @@ module.exports = function(confFile, httpFile) {
 							}else if(j==6){
 								console.log(td.html());
 								var edate = td.html();
-								edate = edate.substring(edate.lastIndexOf("-")+1).trim();
-								var hourStr = "";
-								var pm = 0;
-								if(edate.indexOf("PM")>-1)
-									pm = 12;
-								edate = edate.substring(0, edate.indexOf(" ")).trim();
-								edateHour = edate.substring(0, edate.indexOf(":")).trim();
-								edateMinute = edate.substring(edate.indexOf(":")+1).trim();
-								
-								curTeam.startTime=""+(pm+parseInt(edateHour))+""+edateMinute+"00";
+								var mdate = moment.utc(edate, "ddd, DD MMM YYYY - H:mm A GMT");										
+								curTeam.startTime=mdate.local().format("HHmmss");
 								
 								console.log(curTeam.startTime);
 							}else if(j==7){
@@ -958,6 +951,12 @@ module.exports = function(confFile, httpFile) {
 							else if(zoneKey=='10' && msgObj.z10)
 								process = true;
 							else if(zoneKey=='11' && msgObj.z11)
+								process = true;
+							else if(zoneKey=='12' && msgObj.z12)
+								process = true;
+							else if(zoneKey=='13' && msgObj.z13)
+								process = true;
+							else if(zoneKey=='14' && msgObj.z14)
 								process = true;
 							
 							if(zoneKey != teamObj.zone && process){

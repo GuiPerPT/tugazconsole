@@ -53,6 +53,9 @@
 				msg.z9 = $('#zone9').is(":checked");
 				msg.z10 = $('#zone10').is(":checked");
 				msg.z11 = $('#zone11').is(":checked");
+				msg.z12 = $('#zone12').is(":checked");
+				msg.z13 = $('#zone13').is(":checked");
+				msg.z14 = $('#zone14').is(":checked");
 				socket.emit('message', JSON.stringify(msg));
 			}
 		}
@@ -122,6 +125,15 @@
 		<br/>
 		<input type="checkbox" id="zone11" name="zone11" />
 		<label for="zone11">Zone 11</label>
+		<br/>
+		<input type="checkbox" id="zone12" name="zone12" />
+		<label for="zone12">Zone 12</label>
+		<br/>
+		<input type="checkbox" id="zone13" name="zone13" />
+		<label for="zone13">Zone 13</label>
+		<br/>
+		<input type="checkbox" id="zone14" name="zone14" />
+		<label for="zone14">Zone 14</label>
 	</div>
 	<div id="ZRL_section">
 		<p>Team Name (ex. "TugaZ Caramulo"):</p>
